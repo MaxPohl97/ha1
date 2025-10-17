@@ -47,7 +47,7 @@ class CalculatorTest {
 
     // Teilaufgabe 2
     @Test
-    @DisplayName("latestalue should be unchanged after pressing Clear key once")
+    @DisplayName("latestValue should be unchanged after pressing Clear key once")
     void testClearKeySinglePress() {
         Calculator calc = new Calculator();
 
@@ -60,6 +60,19 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    // Teilaufgabe 2
+    @Test
+    @DisplayName("nothing happens on pressEqualsKey if latestOperation is empty")
+    void testEqualsKeyEmptylatestOperation() {
+        Calculator calc = new Calculator();
+
+        calc.pressEqualsKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     @DisplayName("should display result after getting the square root of two")
