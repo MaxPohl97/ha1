@@ -58,6 +58,10 @@ class CalculatorTest {
         Double actual = calc.getLatestValue();
 
         assertEquals(expected, actual);
+
+        String expectedString = "0";
+        String actualString = calc.readScreen();
+        assertEquals(expectedString, actualString);
     }
 
     // Teilaufgabe 2
