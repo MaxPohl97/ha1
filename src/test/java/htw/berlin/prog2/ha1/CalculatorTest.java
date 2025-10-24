@@ -63,7 +63,7 @@ class CalculatorTest {
     // Teilaufgabe 2
     @Test
     @DisplayName("nothing happens on pressEqualsKey if latestOperation is empty")
-    void testEqualsKeyEmptylatestOperation() {
+    void testEqualsKeyEmptyLatestOperation() {
         Calculator calc = new Calculator();
 
         calc.pressEqualsKey();

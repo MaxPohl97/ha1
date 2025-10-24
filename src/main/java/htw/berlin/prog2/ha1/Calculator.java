@@ -19,7 +19,9 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean alreadyPressedClear = false;
 
+    public void setLatestValue(double latestValue) {
         this.latestValue = latestValue;
     }
 
@@ -55,9 +57,13 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
+        if (alreadyPressedClear) {
+            latestOperation = "";
+            latestValue = 0.0;
+        } else {
+            alreadyPressedClear = true;
+        }
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
     }
 
     /**
@@ -93,8 +99,6 @@ public class Calculator {
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("NaN")) screen = "Error";
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
         if (screen.equals("NaN")) screen = "Error";
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
 
@@ -137,14 +141,13 @@ public class Calculator {
             case "-" -> latestValue - Double.parseDouble(screen);
             case "x" -> latestValue * Double.parseDouble(screen);
             case "/" -> latestValue / Double.parseDouble(screen);
+            case "" -> latestValue;
             default -> throw new IllegalArgumentException();
         };
         screen = Double.toString(result);
-        if(screen.equals("Infinity")) screen = "Error";
-        if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
-        if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
         if (screen.equals("Infinity")) screen = "Error";
         if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        this.alreadyPressedClear = false;
     }
 }
